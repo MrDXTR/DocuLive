@@ -8,6 +8,7 @@ import Header from "./Header";
 import ActiveCollaborators from "./ActiveCollaborators";
 import { Input } from "./ui/input";
 import Image from "next/image";
+import { updateDocumentTitle } from "@/lib/actions/room.actions";
 
 const CollaborativeRoom = ({
   roomId,
@@ -20,7 +21,26 @@ const CollaborativeRoom = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const updateDocumentTitle = (e: React.KeyboardEvent<HTMLInputElement>) => {};
+  const updateTitleHandler = async (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Enter") {
+      setLoading(true);
+      try {
+        if (documentTitle.trim() === "") {
+          throw new Error("Document title cannot be empty");
+        } else if (documentTitle !== roomMetadata.title) {
+          const updatedDocument = await updateDocumentTitle(
+            roomId,
+            documentTitle
+          );
+          if (updatedDocument) {
+            setLoading(false);
+          }
+        }
+      } catch (error) {}
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -29,11 +49,18 @@ const CollaborativeRoom = ({
         !containerRef.current.contains(e.target as Node)
       ) {
         setEditing(false);
+        updateDocumentTitle(roomId, documentTitle);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [documentTitle, roomId]);
+
+  useEffect(() => {
+    if (editing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editing]);
 
   return (
     <RoomProvider id={roomId}>
@@ -52,7 +79,7 @@ const CollaborativeRoom = ({
                   value={documentTitle}
                   onChange={(e) => setDocumentTitle(e.target.value)}
                   placeholder="Enter a title"
-                  onKeyDown={updateDocumentTitle}
+                  onKeyDown={updateTitleHandler}
                   disabled={!editing}
                   className="document-title-input"
                 />

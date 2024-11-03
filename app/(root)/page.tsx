@@ -6,13 +6,16 @@ import Image from "next/image";
 import AddDocument from "@/components/AddDocument";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { getDocuments } from "@/lib/actions/room.actions";
 
 const Home = async () => {
   const clerkUser = await currentUser();
   if (!clerkUser) {
     redirect("/sign-in");
   }
-  const documents: any[] = [];
+  const documents = await getDocuments(
+    clerkUser.emailAddresses[0].emailAddress
+  );
   return (
     <main className="home-container">
       <Header className="sticky top-0 left-0 ">
@@ -23,8 +26,24 @@ const Home = async () => {
           </SignedIn>
         </div>
       </Header>
-      {documents.length > 0 ? (
-        <div></div>
+      {documents.data.length > 0 ? (
+        <div className="document-list-container">
+          <div className="document-list-title">
+            <h3 className="text-28 font-semibold">All Documents</h3>
+            <AddDocument
+              userId={clerkUser.id}
+              email={clerkUser.emailAddresses[0].emailAddress}
+            />
+          </div>
+          <ul className="document-list">
+            {documents.data.map(({ id, metadata, createdAt }: any) => (
+              <li key={id} className="document-list-item">
+                <p>{metadata.title}</p>
+                <p>{createdAt}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : (
         <div className="document-list-empty">
           <Image
