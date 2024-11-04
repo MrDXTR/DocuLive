@@ -12,11 +12,6 @@ import { useUser } from "@clerk/nextjs";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   const { user: clerkUser } = useUser();
-
-  if (!clerkUser?.emailAddresses[0]?.emailAddress) {
-    return null;
-  }
-
   return (
     <LiveblocksProvider
       authEndpoint={"/api/liveblocks-auth"}
@@ -27,7 +22,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
       resolveMentionSuggestions={async ({ text, roomId }) => {
         const roomUsers = await getDocumentUsers({
           roomId,
-          currentUser: clerkUser.emailAddresses[0].emailAddress,
+          currentUser: clerkUser?.emailAddresses[0].emailAddress!,
           text,
         });
         return roomUsers;
