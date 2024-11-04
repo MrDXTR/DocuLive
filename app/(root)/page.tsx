@@ -28,7 +28,7 @@ const Home = async () => {
           </SignedIn>
         </div>
       </Header>
-      {documents.data.length > 0 ? (
+      {documents?.data?.length > 0 ? (
         <div className="document-list-container">
           <div className="document-list-title">
             <h3 className="text-28 font-semibold">All Documents</h3>
@@ -38,7 +38,7 @@ const Home = async () => {
             />
           </div>
           <ul className="document-ul">
-            {documents.data.map(({ id, metadata, createdAt }: any) => (
+            {documents?.data?.map(({ id, metadata, createdAt }: any) => (
               <li key={id} className="document-list-item">
                 <Link
                   href={`/documents/${id}`}
