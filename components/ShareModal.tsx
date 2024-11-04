@@ -68,8 +68,16 @@ const ShareModal = ({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            <UserTypeSelector userType={userType} setUserType={setUserType} />
           </div>
-          <UserTypeSelector userType={userType} setUserType={setUserType} />
+          <Button
+            type="submit"
+            onClick={shareDocumentHandler}
+            className="gradient-blue flex h-full gap-1 px-5"
+            disabled={loading}
+          >
+            {loading ? "Sharing..." : "Share"}
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
