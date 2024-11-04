@@ -7,6 +7,8 @@ import AddDocument from "@/components/AddDocument";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { getDocuments } from "@/lib/actions/room.actions";
+import Link from "next/link";
+import { dateConverter } from "@/lib/utils";
 
 const Home = async () => {
   const clerkUser = await currentUser();
@@ -35,11 +37,28 @@ const Home = async () => {
               email={clerkUser.emailAddresses[0].emailAddress}
             />
           </div>
-          <ul className="document-list">
+          <ul className="document-ul">
             {documents.data.map(({ id, metadata, createdAt }: any) => (
               <li key={id} className="document-list-item">
-                <p>{metadata.title}</p>
-                <p>{createdAt}</p>
+                <Link
+                  href={`/documents/${id}`}
+                  className="flex-1 flex items-center gap-4"
+                >
+                  <div className="hidden rounded-md bg-dark-500 p-2 sm:block">
+                    <Image
+                      src="/assets/icons/doc.svg"
+                      alt="document"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="line-clamp-1 text-lg">{metadata.title}</p>
+                    <p className="text-sm text-blue-100 font-light">
+                      Created about {dateConverter(createdAt)}
+                    </p>
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
