@@ -9,9 +9,9 @@ const Header = ({ children, className }: HeaderProps) => {
         <Image
           src="/assets/icons/logo.svg"
           alt="logo"
-          width={120}
+          width={30}
           height={30}
-          className="hidden md:block "
+          className="hidden md:block max-w-[120px] max-h-[30px] overflow-hidden"
         />
         <Image
           src="/assets/icons/logo-icon.svg"
