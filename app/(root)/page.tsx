@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { getDocuments } from "@/lib/actions/room.actions";
 import Link from "next/link";
 import { dateConverter } from "@/lib/utils";
+import { DeleteModal } from "@/components/DeleteModal";
 
 const Home = async () => {
   const clerkUser = await currentUser();
@@ -59,6 +60,7 @@ const Home = async () => {
                     </p>
                   </div>
                 </Link>
+                <DeleteModal roomId={id} />
               </li>
             ))}
           </ul>
