@@ -13,6 +13,7 @@ import Image from "next/image";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import UserTypeSelector from "./UserTypeSelector";
+import Collaborator from "./Collaborator";
 
 const ShareModal = ({
   roomId,
@@ -78,6 +79,20 @@ const ShareModal = ({
           >
             {loading ? "Sharing..." : "Share"}
           </Button>
+        </div>
+        <div className="my-2 space-x-2">
+          <ul className="flex flex-col gap-2">
+            {collaborators.map((collaborator) => (
+              <Collaborator
+                key={collaborator.id}
+                roomId={roomId}
+                creatorId={creatorId}
+                collaborator={collaborator}
+                email={collaborator.email}
+                user={user.info}
+              />
+            ))}
+          </ul>
         </div>
       </DialogContent>
     </Dialog>
