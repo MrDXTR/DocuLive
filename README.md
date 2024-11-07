@@ -7,7 +7,7 @@ DocuLive is a **Next.js** project designed for real-time document collaboration,
 1. **Live Collaboration**: Real-time document editing powered by [Liveblocks](https://liveblocks.io/).
 2. **User Authentication**: Managed by [Clerk](https://clerk.dev/) for secure login.
 3. **Rich Text Editing**: Integrated with [Lexical](https://lexical.dev/).
-4. **UI Components**: Styled with [shadcn](https://ui.shadcn.dev/) and [Radix UI](https://www.radix-ui.com/) for cohesive design.
+4. **UI Components**: Styled with [shadcn](https://ui.shadcn.com/) and [Radix UI](https://www.radix-ui.com/) for cohesive design.
 
 ## Technologies
 
