@@ -5,7 +5,7 @@ import Image from "next/image";
 const Header = ({ children, className }: HeaderProps) => {
   return (
     <div className={`header ${className}`}>
-      <Link href={`/`} className="md:flex-1">
+      <Link href={`/`} className="md:flex-1 flex items-center flex-row">
         <Image
           src="/assets/icons/logo.svg"
           alt="logo"
@@ -20,7 +20,11 @@ const Header = ({ children, className }: HeaderProps) => {
           height={32}
           className="md:hidden mr-2 "
         />
+        <span className="hidden md:block ml-2 text-xl font-semibold">
+          DocuLive
+        </span>
       </Link>
+
       {children}
     </div>
   );
