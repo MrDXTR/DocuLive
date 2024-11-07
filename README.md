@@ -1,17 +1,13 @@
 # DocuLive
 
-DocuLive is a **Next.js** project designed to streamline document collaboration in real time. This project enables multiple users to collaborate on documents simultaneously with features such as:
+DocuLive is a **Next.js** project designed for real-time document collaboration, featuring secure authentication, rich text editing, and live document synchronization.
 
-1. **Live Collaboration**: Edit documents with multiple users in real-time.
-2. **User Authentication**: Secure login using **Clerk** for user management.
-3. **Live Document Sync**: Powered by **Liveblocks** for real-time collaboration.
-4. **Document Versioning**: Track and manage document versions.
+## Key Features
 
-## Features
-
-- **Real-Time Collaboration**: Synchronous editing across users.
-- **Secure Document Access**: Authenticated user sessions.
-- **Document Management**: Version control for organized document history.
+1. **Live Collaboration**: Real-time document editing powered by [Liveblocks](https://liveblocks.io/).
+2. **User Authentication**: Managed by [Clerk](https://clerk.dev/) for secure login.
+3. **Rich Text Editing**: Integrated with [Lexical](https://lexical.dev/).
+4. **UI Components**: Styled with [shadcn](https://ui.shadcn.dev/) and [Radix UI](https://www.radix-ui.com/) for cohesive design.
 
 ## Technologies
 
@@ -19,10 +15,12 @@ DocuLive is a **Next.js** project designed to streamline document collaboration 
 - **TypeScript**: Type safety
 - **Clerk**: Authentication
 - **Liveblocks**: Real-time collaboration
-- **CSS**: Styling
+- **Lexical**: Text editor
+- **shadcn** and **Radix UI**: Styling and components
+- **Tailwind CSS**: Custom styling
 
 ## Deployment
 
-Deploy on **Vercel** for a seamless Next.js hosting experience.
+Deploy on **Vercel** for seamless hosting.
 
 --- 
